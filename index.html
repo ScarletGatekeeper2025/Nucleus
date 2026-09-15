@@ -1,0 +1,99 @@
+<!-- PARTE 1: EL ESQUERETO (HTML) -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>NUCLEUS - Simulador de Bucle Temporal</title>
+    <link rel="stylesheet" href="Nucleus.css">
+</head>
+<body>
+    <!-- MENÚ DE INICIO -->
+    <div id="menu-screen" class="screen active">
+        <h1>Nucleus</h1>
+        <p>Operador, el núcleo de la paradoja temporal está bajo tu mando. Modula la estabilidad cuántica y sobrevive a los cambios del continuo. Recuerda: la perfección del 100% quiebra la realidad.</p>
+        
+        <div class="score-board">
+            <div class="score-item">
+                <span class="score-label">Récord Máximo</span>
+                <span id="menu-highscore" class="score-value">0</span>
+            </div>
+        </div>
+
+        <button class="btn" onclick="startGame()">Iniciar Secuencia</button>
+    </div>
+
+    <!-- PANTALLA DE JUEGO -->
+    <div id="game-screen" class="screen">
+        <div class="score-board">
+            <div class="score-item">
+                <span class="score-label">Ciclo Actual</span>
+                <span id="game-streak" class="score-value">0</span>
+            </div>
+            <div class="score-item">
+                <span class="score-label">Récord</span>
+                <span id="game-highscore" class="score-value">0</span>
+            </div>
+            <div class="score-item">
+                <span class="score-label">Decena</span>
+                <span id="game-tier" class="score-value">1</span>
+            </div>
+        </div>
+
+        <div class="mission-box">
+            <div class="mission-title">Directiva de Misión</div>
+            <div id="mission-desc" class="mission-desc">Estabilizando...</div>
+        </div>
+
+        <div class="bar-container">
+            <div class="bar-label">
+                <span>Estabilidad Cuántica</span>
+                <span id="stability-value">50%</span>
+            </div>
+            <div class="progress-bar">
+                <div id="critical-msg" class="critical-warning">¡SOBRESTABILIDAD CRÍTICA!</div>
+                <div id="target-zone"></div>
+                <div id="stability-fill" class="progress-fill"></div>
+            </div>
+        </div>
+
+        <div class="bar-container">
+            <div class="bar-label">
+                <span>Tiempo Restante</span>
+                <span id="time-value">10.0s</span>
+            </div>
+            <div class="progress-bar" style="height: 8px;">
+                <div id="time-fill" class="progress-fill" style="background: var(--warning-color); width: 100%;"></div>
+            </div>
+        </div>
+
+        <div id="anomaly-box" class="anomaly-alert">Núcleo estable. Esperando fluctuaciones...</div>
+
+        <div class="controls-grid">
+            <button id="btn-inject" class="btn" onclick="adjustStability(12)">Inyectar Masa</button>
+            <button id="btn-extract" class="btn" onclick="adjustStability(-12)">Extraer Masa</button>
+        </div>
+
+        <button id="btn-vent" class="btn btn-danger" onclick="triggerVenting()">Ventilación Forzada (-25%)</button>
+        <span id="vent-cooldown" class="cooldown-text">Sistema listo</span>
+    </div>
+
+    <!-- PANTALLA DE ÉXITO DE CICLO -->
+    <div id="success-screen" class="screen">
+        <h1 style="color: var(--success-color);">Ciclo Asegurado</h1>
+        <p>Has cumplido la directiva temporal con éxito. Las fluctuaciones inmediatas se han mitigado.</p>
+        <button class="btn" onclick="nextCycle()">Continuar al Siguiente Ciclo</button>
+        <button class="btn btn-danger btn-hold-exit">Abandonar (Perder Racha)</button>
+    </div>
+
+    <!-- PANTALLA DE GAME OVER -->
+    <div id="gameover-screen" class="screen">
+        <h1 style="color: var(--danger-color);">Bucle Colapsado</h1>
+        <p id="gameover-reason">El tejido del tiempo se desgarró por completo.</p>
+        <button class="btn" onclick="startGame()">Reintentar Secuencia</button>
+        <button class="btn btn-danger btn-hold-exit">Volver al Menú</button>
+    </div>
+
+    <script src="nucleus.js"></script>
+    </body>
+</html>
