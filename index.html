@@ -52,6 +52,7 @@
             </div>
             <div class="progress-bar">
                 <div id="critical-msg" class="critical-warning">¡SOBRESTABILIDAD CRÍTICA!</div>
+                <div id="target-zone"></div>
                 <div id="stability-fill" class="progress-fill"></div>
             </div>
         </div>
@@ -82,7 +83,7 @@
         <h1 style="color: var(--success-color);">Ciclo Asegurado</h1>
         <p>Has cumplido la directiva temporal con éxito. Las fluctuaciones inmediatas se han mitigado.</p>
         <button class="btn" onclick="nextCycle()">Continuar al Siguiente Ciclo</button>
-        <button class="btn btn-danger" onclick="goToMenu()">Abandonar (Perder Racha)</button>
+        <button class="btn btn-danger btn-hold-exit">Abandonar (Perder Racha)</button>
     </div>
 
     <!-- PANTALLA DE GAME OVER -->
@@ -90,7 +91,7 @@
         <h1 style="color: var(--danger-color);">Bucle Colapsado</h1>
         <p id="gameover-reason">El tejido del tiempo se desgarró por completo.</p>
         <button class="btn" onclick="startGame()">Reintentar Secuencia</button>
-        <button class="btn btn-danger" onclick="goToMenu()">Volver al Menú</button>
+        <button class="btn btn-danger btn-hold-exit">Volver al Menú</button>
     </div>
 
     <script src="nucleus.js"></script>
