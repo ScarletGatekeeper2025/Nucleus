@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NUCLEUS - Arcade Core Management</title>
+    <link rel="stylesheet" href="Nucleus.css">
+</head>
+<body>
+
+    <!-- Control de Audio Global -->
+    <button id="btn-mute" class="btn btn-small" onclick="toggleMute()">🔊 SOUND: ON</button>
+
+    <!-- 1. PANTALLA DE MENÚ PRINCIPAL -->
+    <div id="menu-screen" class="screen active">
+        <h1 class="title">NUCLEUS</h1>
+        <p class="subtitle">ESTABILIZADOR DE SINGULARIDAD v0.3.0</p>
+        
+        <div class="stats-box">
+            <p>MÁXIMA RACHA: <span id="menu-highscore">0</span></p>
+        </div>
+
+        <button class="btn btn-primary" onclick="startGame()">INICIAR SECUENCIA</button>
+    </div>
+
+    <!-- 2. PANTALLA DE JUEGO -->
+    <div id="game-screen" class="screen">
+        <div class="header-info">
+            <span>DÉCADA: <strong id="game-tier">1</strong></span>
+            <span>RACHA: <strong id="game-streak">0</strong></span>
+            <span>RÉCORD: <strong id="game-highscore">0</strong></span>
+        </div>
+
+        <div id="mission-box" class="card">
+            <h2>DIRECTIVA DEL CICLO</h2>
+            <p id="mission-desc">Cargando datos de la misión...</p>
+            <div id="anomaly-box" class="anomaly-tag">Ninguna</div>
+        </div>
+
+        <!-- Alerta de Hipercriticidad -->
+        <div id="critical-msg" class="alert-box" style="display: none;">
+            ⚠️ ALERTA: HIPERCRITICIDAD ALCANZADA (-4.5%/s)
+        </div>
+
+        <!-- Indicadores de Estado -->
+        <div class="meter-container">
+            <div class="meter-label">
+                <span>ESTABILIDAD DE MASA</span>
+                <span id="stability-value">50%</span>
+            </div>
+            <div class="meter-bar">
+                <div id="stability-fill" class="meter-fill" style="width: 50%;"></div>
+            </div>
+        </div>
+
+        <div class="meter-container">
+            <div class="meter-label">
+                <span>TIEMPO RESTANTE</span>
+                <span id="time-value">10.0s</span>
+            </div>
+            <div class="meter-bar">
+                <div id="time-fill" class="meter-fill" style="width: 100%;"></div>
+            </div>
+        </div>
+
+        <!-- Controles Manuales -->
+        <div class="controls-grid">
+            <button class="btn" onclick="adjustStability(12)">INYECTAR MASA (+12%)</button>
+            <button class="btn" onclick="adjustStability(-12)">EXTRAER MASA (-12%)</button>
+        </div>
+
+        <div class="vent-container">
+            <button id="btn-vent" class="btn btn-danger" onclick="triggerVenting()">VENTILACIÓN DE EMERGENCIA (-25%)</button>
+            <span id="vent-cooldown" class="subtext">Sistema listo</span>
+        </div>
+    </div>
+
+    <!-- 3. PANTALLA DE ÉXITO -->
+<div id="success-screen" class="screen">
+    <h2 class="title-success">CICLO ESTABILIZADO</h2>
+    <p>La masa del núcleo se mantuvo dentro de los parámetros esperados.</p>
+    
+    <button class="btn btn-primary" onclick="nextCycle()">SIGUIENTE CICLO</button>
+    <button class="btn" onclick="goToMenu()">MENÚ PRINCIPAL</button>
+</div>
+
+    <!-- 4. PANTALLA DE GAME OVER -->
+    <div id="gameover-screen" class="screen">
+        <h2 class="title-danger">COLAPSO DEL NÚCLEO</h2>
+        <p id="gameover-reason">Error crítico desconocido.</p>
+        
+        <button class="btn btn-primary" onclick="startGame()">REINTENTAR DESDE EL INICIO</button>
+        <button class="btn" onclick="goToMenu()">MENÚ PRINCIPAL</button>
+    </div>
+
+    <!-- Librería de audio Howler.js por CDN y Script Principal -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <script src="nucleus.js"></script>
+</body>
+</html>

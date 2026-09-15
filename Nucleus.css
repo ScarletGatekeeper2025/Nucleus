@@ -1,0 +1,250 @@
+/* ==========================================================================
+   NUCLEUS - v0.3.0 (The Audio Update) - Stylesheet
+   ========================================================================== */
+
+:root {
+    --bg-color: #0d0f12;
+    --accent-color: #00f0ff;
+    --danger-color: #ff003c;
+    --success-color: #00ff66;
+    --warning-color: #ffaa00;
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --border-color: rgba(255, 255, 255, 0.15);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: #e0e0e0;
+    font-family: 'Courier New', Courier, monospace;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.5s ease;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+/* --- CONTROL DE AUDIO (FIXED) --- */
+#btn-mute {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#btn-mute:hover {
+    background: var(--accent-color);
+    color: var(--bg-color);
+    box-shadow: 0 0 10px var(--accent-color);
+}
+
+/* --- ESTRUCTURA DE PANTALLAS --- */
+.screen {
+    display: none;
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
+}
+
+.screen.active {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* --- TIPOGRAFÍAS Y CABECERAS --- */
+.title {
+    font-size: 2.8rem;
+    color: var(--accent-color);
+    letter-spacing: 4px;
+    text-shadow: 0 0 15px var(--accent-color);
+}
+
+.subtitle {
+    font-size: 0.85rem;
+    color: #888;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.title-success {
+    color: var(--success-color);
+    text-shadow: 0 0 10px var(--success-color);
+}
+
+.title-danger {
+    color: var(--danger-color);
+    text-shadow: 0 0 10px var(--danger-color);
+}
+
+.header-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    padding: 8px 12px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: #aaa;
+}
+
+.header-info strong {
+    color: var(--accent-color);
+}
+
+/* --- TARJETAS Y CONTENEDORES --- */
+.stats-box, .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.card h2 {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+#mission-desc {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    min-height: 2.8em;
+}
+
+.anomaly-tag {
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: var(--warning-color);
+    background: rgba(255, 170, 0, 0.1);
+    padding: 4px 8px;
+    border: 1px dashed var(--warning-color);
+}
+
+/* --- ALERTAS --- */
+.alert-box {
+    background: rgba(255, 0, 60, 0.2);
+    border: 1px solid var(--danger-color);
+    color: var(--danger-color);
+    padding: 8px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    animation: blink 0.8s infinite alternate;
+}
+
+@keyframes blink {
+    from { opacity: 0.4; }
+    to { opacity: 1; }
+}
+
+/* --- BARRAS DE ESTADO --- */
+.meter-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.meter-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: #aaa;
+}
+
+.meter-bar {
+    width: 100%;
+    height: 18px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    position: relative;
+}
+
+.meter-fill {
+    height: 100%;
+    background: var(--accent-color);
+    box-shadow: 0 0 10px var(--accent-color);
+    transition: width 0.1s linear, background-color 0.3s ease;
+}
+
+/* --- BOTONES Y CONTROLES --- */
+.controls-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.vent-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 5px;
+}
+
+.btn {
+    background: transparent;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    padding: 12px;
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn:hover:not(:disabled) {
+    background: var(--accent-color);
+    color: var(--bg-color);
+    box-shadow: 0 0 12px var(--accent-color);
+}
+
+.btn:disabled {
+    border-color: #444;
+    color: #444;
+    cursor: not-allowed;
+}
+
+.btn-primary {
+    background: var(--accent-color);
+    color: var(--bg-color);
+}
+
+.btn-primary:hover {
+    background: #fff;
+    color: #000;
+    box-shadow: 0 0 15px #fff;
+}
+
+.btn-danger {
+    border-color: var(--danger-color);
+    color: var(--danger-color);
+}
+
+.btn-danger:hover:not(:disabled) {
+    background: var(--danger-color);
+    color: #fff;
+    box-shadow: 0 0 12px var(--danger-color);
+}
+
+.subtext {
+    font-size: 0.75rem;
+    color: #666;
+}
+
