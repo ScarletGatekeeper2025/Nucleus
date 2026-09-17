@@ -326,3 +326,321 @@ p {
 .btn-frenzy {
     animation: frenzyGlow 0.3s infinite ease-in-out;
 }
+
+/* ==========================================
+   EFECTOS VISUALES DE ARQUETIPOS DE JEFES
+   ========================================== */
+
+/* 1. NÚCLEO CIEGO: Oculta el porcentaje y el relleno de la barra */
+.blind-active #stability-fill,
+.blind-active #stability-value {
+    opacity: 0 !important;
+    filter: blur(10px);
+    transition: opacity 0.25s ease-in-out, filter 0.25s ease-in-out;
+}
+
+/* Indicador visual de la barra en modo Ciego */
+.blind-active .bar-container {
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    background: #050505 !important;
+}
+
+/* 2. NÚCLEO GRAVITACIONAL: Alerta visual de inversión */
+.gravity-inverted {
+    border-color: #ff00d4 !important;
+    box-shadow: 0 0 25px rgba(255, 0, 212, 0.7) !important;
+}
+
+.gravity-inverted .btn-control {
+    background: rgba(255, 0, 212, 0.15) !important;
+}
+
+/* 3. SEGUNDA ZONA SEGURA (Jefe Bipolar) */
+#target-zone-2 {
+    position: absolute;
+    height: 100%;
+    background: rgba(0, 240, 255, 0.25);
+    border-left: 2px solid var(--accent-color);
+    border-right: 2px solid var(--accent-color);
+    pointer-events: none;
+}
+
+/* ==========================================
+   PANEL DE TELEMETRÍA POST-MORTEM (GAME OVER)
+   ========================================== */
+.telemetry-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 15px 0 20px 0;
+}
+
+.telemetry-card {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-left: 3px solid var(--accent-color);
+    padding: 10px;
+    border-radius: 6px;
+    text-align: left;
+}
+
+.telemetry-label {
+    font-size: 0.68rem;
+    color: #718096;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    display: block;
+    letter-spacing: 0.5px;
+}
+
+.telemetry-value {
+    font-size: 1.15rem;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+/* Botones de confirmación por retención */
+.btn-hold {
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Barra de progreso de llenado interno */
+.btn-hold::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background: rgba(255, 255, 255, 0.25);
+    transition: width 0.05s linear;
+    pointer-events: none;
+}
+
+.btn-hold.holding::after {
+    width: 100%;
+    transition: width 0.8s linear; /* Tiempo requerido sosteniendo */
+}
+
+/* Botones de Control Superior */
+.top-controls {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    display: flex;
+    gap: 10px;
+    z-index: 1000; /* Garantiza que siempre esté por encima de cualquier capa */
+}
+
+.btn-icon {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--accent-color, #00f0ff);
+    color: #fff;
+    font-size: 1.2rem;
+    width: 55px;
+    height: 28px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.btn-icon:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.05);
+}
+
+.btn-icon:active {
+    transform: scale(0.95);
+}
+
+/* Pantalla de Pausa */
+.pause-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(13, 15, 18, 0.85);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+}
+
+.pause-card {
+    background: rgba(20, 24, 30, 0.95);
+    border: 2px solid var(--accent-color, #00f0ff);
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    min-width: 280px;
+}
+
+.pause-card h2 {
+    margin: 0;
+    color: var(--accent-color, #00f0ff);
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}
+
+.pause-card p {
+    color: #aaa;
+    font-size: 0.9rem;
+    margin: 0 0 10px 0;
+}
+
+/* ==========================================
+   MODAL DE INSTRUCCIONES / AYUDA (NUCLEUS)
+   ========================================== */
+
+/* Fondo oscuro y desenfoque (Oculto por defecto) */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  justify-content: center;
+  align-items: center;
+  z-index: 99999; /* Asegura quedar por encima de todo el canvas y HUD */
+}
+
+/* Mostrar modal solo cuando JS agregue la clase .show */
+.modal-overlay.show {
+  display: flex !important;
+}
+
+/* Caja principal del Modal */
+.modal-content {
+  background: #0a0e14;
+  border: 1px solid #00f0ff;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.35), inset 0 0 10px rgba(0, 240, 255, 0.05);
+  color: #e0e0e0;
+  padding: 22px 20px;
+  width: 85%;
+  max-width: 360px;
+  border-radius: 8px;
+  font-family: monospace;
+  box-sizing: border-box;
+  animation: modalFadeIn 0.2s ease-out;
+}
+
+/* Animación sutil de apertura */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Encabezado / Título del Modal */
+.modal-content h2 {
+  color: #00f0ff;
+  margin: 0 0 10px 0;
+  font-size: 1.05rem;
+  text-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
+}
+
+/* Línea Divisoria Neón */
+.modal-divider {
+  border: 0;
+  height: 1px;
+  background: #00f0ff;
+  opacity: 0.4;
+  margin: 0 0 15px 0;
+}
+
+/* Lista de Instrucciones */
+.modal-content ul {
+  padding-left: 18px;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  margin: 0 0 20px 0;
+  color: #cccccc;
+}
+
+.modal-content li {
+  margin-bottom: 10px;
+}
+
+.modal-content li strong {
+  color: #00f0ff;
+}
+
+.modal-content li em {
+  color: #ffffff;
+  font-style: normal;
+  text-decoration: underline;
+}
+
+/* Botón de Cierre "ENTENDIDO" */
+.modal-close {
+  width: 100%;
+  padding: 12px;
+  background: rgba(0, 240, 255, 0.12);
+  border: 1px solid #00f0ff;
+  color: #00f0ff;
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: background 0.15s ease, color 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.modal-close:hover,
+.modal-close:active {
+  background: #00f0ff;
+  color: #000000;
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
+}
+
+/* Botón "?" circular del Menú Principal */
+#btn-help {
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid #00f0ff;
+  color: #00f0ff;
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 0.95rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.15s, box-shadow 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#btn-help:active {
+  background: #00f0ff;
+  color: #000000;
+  box-shadow: 0 0 10px #00f0ff;
+}

@@ -11,6 +11,7 @@
     <!-- MENÚ DE INICIO -->
     <div id="menu-screen" class="screen active">
         <h1>Nucleus</h1>
+        <button id="btn-help" class="ui-btn">?</button>
         <p>Operador, el núcleo de la paradoja temporal está bajo tu mando. Modula la estabilidad cuántica y sobrevive a los cambios del continuo. Recuerda: la perfección del 100% quiebra la realidad.</p>
         
         <div class="score-board">
@@ -37,6 +38,21 @@
             <div class="score-item">
                 <span class="score-label">Decena</span>
                 <span id="game-tier" class="score-value">1</span>
+    <!-- Controles Superiores (Silenciar y Pausar) -->
+           <div class="top-controls">
+               <button id="btn-mute" class="btn-icon" onclick="toggleMute()" title="Silenciar (M)">🔊</button>
+               <button id="btn-pause" class="btn-icon" onclick="togglePause()" title="Pausar (P / Esc)">⏸️</button>
+           </div>
+
+    <!-- Overlay de Pausa -->
+            <div id="pause-overlay" class="pause-overlay" style="display: none;">
+                <div class="pause-card">
+                    <h2>SISTEMA EN PAUSA</h2>
+                    <p>Presiona <strong>P</strong> o <strong>Esc</strong> para continuar</p>
+                    <button class="btn" onclick="togglePause()">Reanudar Secuencia</button>
+                    <button class="btn btn-hold-exit" data-default-text="Salir al Menú">Salir al Menú</button>
+                </div>
+             </div>
             </div>
         </div>
 
@@ -53,6 +69,7 @@
             <div class="progress-bar">
                 <div id="critical-msg" class="critical-warning">¡SOBRESTABILIDAD CRÍTICA!</div>
                 <div id="target-zone"></div>
+                <div id="target-zone-2" class="target-zone" style="display: none;"></div>
                 <div id="stability-fill" class="progress-fill"></div>
             </div>
         </div>
@@ -82,18 +99,42 @@
     <div id="success-screen" class="screen">
         <h1 style="color: var(--success-color);">Ciclo Asegurado</h1>
         <p>Has cumplido la directiva temporal con éxito. Las fluctuaciones inmediatas se han mitigado.</p>
-        <button class="btn" onclick="nextCycle()">Continuar al Siguiente Ciclo</button>
+        
+        <!-- TELEMETRÍA DE LA RACHA ACTUAL -->
+    <div id="success-telemetry-box" class="telemetry-container"></div>
+        
+        <button id="btn-next-cycle" class="btn btn-hold">Continuar al Siguiente Ciclo</button>
         <button class="btn btn-danger btn-hold-exit">Abandonar (Perder Racha)</button>
     </div>
-
+    
     <!-- PANTALLA DE GAME OVER -->
     <div id="gameover-screen" class="screen">
         <h1 style="color: var(--danger-color);">Bucle Colapsado</h1>
         <p id="gameover-reason">El tejido del tiempo se desgarró por completo.</p>
-        <button class="btn" onclick="startGame()">Reintentar Secuencia</button>
+    
+    <!-- CONTENEDOR DE TELEMETRÍA POST-MORTEM -->
+    <div id="telemetry-box" class="telemetry-container"></div>
+
+        <button id="btn-restart" class="btn btn-hold">Reintentar Secuencia</button>
         <button class="btn btn-danger btn-hold-exit">Volver al Menú</button>
     </div>
-
+    
+        <!-- MODAL DE INSTRUCCIONES -->
+    <div id="modal-instructions" class="modal-overlay">
+        <div class="modal-content">
+            <h2>Manual del Operador</h2>
+            <hr class="modal-divider">
+            <ul>
+                <li><strong>Directiva:</strong> Mantén la estabilidad en el rango seguro o fuerza el colapso según la orden.</li>
+                <li><strong>Controles:</strong> Usa <em>Inyectar</em> y <em>Extraer</em> para modular la masa cuántica.</li>
+                <li><strong>Purga:</strong> La <em>Ventilación Forzada</em> remueve un 25% de masa en emergencias.</li>
+                <li><strong>Anomalías:</strong> Cada década enfrentarás singularidades de núcleo volátiles.</li>
+            </ul>
+            <button id="btn-close-help" class="modal-close">ENTENDIDO</button>
+        </div>
+    </div>
+    
     <script src="nucleus.js"></script>
-    </body>
+        
+</body>
 </html>
